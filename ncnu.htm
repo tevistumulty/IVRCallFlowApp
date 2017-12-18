@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8" />
+   <!--<meta name="viewport" content="width=device-width,initial-scale=1.0">-->
+   <title>IVR Call Flow Simulation</title>
+   <link rel="stylesheet" href="styles.css" />
+   <!--<script src="modernizr.custom.05819.js"></script>-->
+   <script src="jquery-3.2.1.min.js"></script>
+   <script src="script.js"></script>
+</head>
+<body>
+<div id="header"></div>
+<script>
+    $("#header").load("header.htm");
+</script>
+<div>
+   <article>
+      <h2></h2>
+      <form id="form1" method="post">
+            <button type="submit" id="submit1"></button>
+      </form>
+      <form id="form2" method="post">
+            <button type="submit" id="submit2"></button>
+      </form>
+   </article>
+</div>
+<script>
+	var menu;
+	
+	function setSpanish() {
+		$("#form2").attr("action", "ncnu.htm?zeroState=" + getQueryVariable('zeroState') + 
+			"&amp;lang=sp&amp;page=3&amp;menu=" + menu);
+	}
+	
+	var page = getQueryVariable("page");
+	if (page === undefined) {page = getQueryVariableEsc("page");}
+	menu = getQueryVariable("menu");
+	if (menu === undefined) {menu = getQueryVariableEsc("menu");}
+	switch (page) {
+	case "1":
+		$("h2").html("Thank you for calling AAA, where members come first!");
+		$("#form1").attr("action", "ncnu.htm?zeroState=" + getQueryVariable("zeroState") + 
+			"&amp;lang=en&amp;page=2&amp;menu=" + menu);
+		$("#submit1").html("Next");
+		$("#form2").remove();
+		break;
+	case "2":
+		$("h2").html("For English press '1', para Español, marque '2'");
+		$("#form1").attr("action", "ncnu.htm?zeroState=" + getQueryVariable('zeroState') + 
+			"&amp;lang=en&amp;page=3&amp;menu=" + menu);
+		$("#submit1").html("1");
+		$("#submit2").html("2");
+		$("#submit2").attr("onclick", "setSpanish();");
+		break;
+	case "3":
+		$("h2").html("Please listen carefully as our menu options have changed");
+		$("#form1").attr("action", "ncnu.htm?zeroState=" + getQueryVariable("zeroState") + "&amp;lang=" + 
+			getQueryVariableEsc("lang") + "&amp;page=4&amp;menu=" + getQueryVariableEsc("menu"));
+		$("#submit1").html("Press 3: Changes to existing insurance and claims");
+		$("#form2").attr("action", "ncnu.htm?zeroState=1" + "&amp;lang=" + getQueryVariableEsc("lang") + 
+			"&amp;page=2&amp;menu=" + menu);
+		$("#submit2").html("User presses 0 to repeat menu");
+		break;
+	case "4":
+		$("h2").html("Select 1 for Claims and Insurance");
+		$("#form1").attr("action", "ncnu.htm?zeroState=" + getQueryVariable("zeroState") + 
+			"&amp;lang=" + getQueryVariableEsc("lang") + "&amp;page=5&amp;menu=" + menu);
+		$("#submit1").html("User presses 1");
+		$("#form2").remove();
+		break;
+	case "5":
+		$("h2").html("Are you calling to make a payment or hear when your next payment is due?");
+		$("#form1").attr("action", "ncnu.htm?zeroState=" + getQueryVariable("zeroState") + "&amp;lang=" + 
+			getQueryVariableEsc("lang") + "&amp;page=6&amp;menu=" + menu);
+		$("#submit1").html("Yes");
+		$("#form2").attr("action", "agent.htm?zeroState=" + getQueryVariable("zeroState") + "&amp;lang=" + 
+			getQueryVariableEsc("lang") + "&amp;page=agent&amp;menu=" + menu);
+		$("#submit2").html("No");
+		break;
+	case "6":
+		$("h2").html("Great.  I see a policy that matches your phone number, to ensure that it is yours, please enter your zip code.");
+		$("#form1").attr("action", "agent.htm?zeroState=" + getQueryVariable("zeroState") + 
+			"&amp;lang=" + getQueryVariableEsc("lang") + "&amp;page=agent&amp;menu=" + menu);
+		$("#submit1").html("Speak or key in zip code");
+		$("#form2").remove();
+		break;
+	}
+	
+</script>
+<div id="footer"></div>
+<script>
+    $("#footer").load("footer.htm");
+</script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<body id="headBody">
+<a href="https://n01til700.tent.trt.csaa.pri:8443/CSAAIG_IVR/plugins/data-access-service/DataAccessTester.html#">
+<image src="AAA2.jpg"/></a>
+<div class="drop">
+	<ul class="drop_menu">
+		<li><a id="index" href="index.htm">Restart Simulation</a></li>
+		<li><a id="agent0" href="agent.htm">Press 0 Anytime</a></li>
+	</ul>
+</div>
+<div class="drop">
+	<ul class="drop_menu">
+		<li><a id="1"></a></li>
+		<li><a id="2"></a></li>
+		<li><a id="3"></a></li>
+		<li><a id="4"></a></li>
+		<li><a id="5"></a></li>
+		<li><a id="6"></a></li>
+		<li><a id="7"></a></li>
+	</ul>
+</div>
+<script>
+	//If the user selects NCNU, the menu should be different than for Cloud
+	//Let "main" be the pages for NCNU (rename to ncnu.htm), and "cloud" for cloud
+	//Dynamically populate the innerHTML of the list items of above to match the
+	//correct list, based on the root name of the page (ncnu.htm vs. cloud.htm)
+	var menu = getQueryVariable("menu");
+	if (menu === undefined) {menu = getQueryVariableEsc("menu");}
+	switch (menu) {
+	case "ncnu":
+		$("#1").html("Thanks");
+		$("#2").html("Language");
+		$("#3").html("Menu");
+		$("#4").html("1-C/I");
+		$("#5").html("Payment?");
+		$("#6").html("Zip");
+		$("#7").html("Agent");
+		break;
+	case "cloud":
+		$("#1").html("1-C/I");
+		$("#2").html("Payment?");
+		$("#3").html("Zip");
+		$("#4").html("Agent");
+		$("#5").remove();
+		$("#6").remove();
+		$("#7").remove();	
+		break;
+	}
+	
+	//Change the navigation bar's color for the current page
+	var page = getQueryVariable("page");
+	if (page === undefined) {page = getQueryVariableEsc("page");}
+    $("#" + page).attr("class", "drop_current");
+	
+	//Get the current state of Zero (has the user pressed zero one time already to repeat the menu options?)
+	var zero;
+	try {
+		if (isNaN(zeroState)) {
+			zero = getQueryVariable('zeroState');
+		}
+		else {
+			zero = zeroState;
+		}
+	}
+	catch (e) {zero = getQueryVariable('zeroState');}
+	
+	//Display option for pressing zero to go to agent IF zero has already been pressed once
+	if (zero == 0) {$("#agent0").attr("style", "display:none;");}
+	else {$("#agent0").attr("style", "display:block;");}
+	
+	//Change form background color for Spanish
+	if (getQueryVariableEsc('lang') == "sp") {$("form").css("background", "#ffff00");}
+	else {$("form").css("background", "#0000ff");}	
+
+	//Add href links to each of the navigation short cuts, using the current zero and language values
+	var setting = getQueryVariable("zeroState") + "&amp;lang=" + getQueryVariableEsc("lang");
+
+	switch (menu) {
+	case "ncnu":
+		$("#1").attr("href", "ncnu.htm?zeroState=" + setting + "&amp;page=1&amp;menu=" + menu);
+		$("#2").attr("href", "ncnu.htm?zeroState=" + setting + "&amp;page=2&amp;menu=" + menu);
+		$("#3").attr("href", "ncnu.htm?zeroState=" + setting + "&amp;page=3&amp;menu=" + menu);
+		$("#4").attr("href", "ncnu.htm?zeroState=" + setting + "&amp;page=4&amp;menu=" + menu);
+		$("#5").attr("href", "ncnu.htm?zeroState=" + setting + "&amp;page=5&amp;menu=" + menu);
+		$("#6").attr("href", "ncnu.htm?zeroState=" + setting + "&amp;page=6&amp;menu=" + menu);
+		$("#7").attr("href", "agent.htm?zeroState=" + setting + "&amp;page=agent&amp;menu=" + menu);
+		break;
+	case "cloud":
+		$("#1").attr("href", "cloud.htm?zeroState=" + setting + "&amp;page=1&amp;menu=" + menu);
+		$("#2").attr("href", "cloud.htm?zeroState=" + setting + "&amp;page=2&amp;menu=" + menu);
+		$("#3").attr("href", "cloud.htm?zeroState=" + setting + "&amp;page=3&amp;menu=" + menu);
+		$("#4").attr("href", "agent.htm?zeroState=" + setting + "&amp;page=agent&amp;menu=" + menu);
+		break;
+	}
+	
+</script>
+</body>
+</html>
