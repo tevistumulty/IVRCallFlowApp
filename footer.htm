@@ -5,22 +5,62 @@
 <textarea id="txtAudit" />
 </div>
 <script>
-   if (document.cookie) {
-      var audit = document.cookie;
-      audit = audit.substring(audit.lastIndexOf("=") + 1);
-      document.getElementById("txtAudit").value = audit;
-   }
+	//Get audit data from cookie
+	try {
+		var audit;
+		if (document.cookie) {
+			audit = document.cookie;
+			audit = audit.substring(audit.lastIndexOf("=") + 1);
+			document.getElementById("txtAudit").value = audit;
+		}
+	}
+	catch (ex) {
+		console.log('Setting txtAudit to cookie value', ex.message);
+	}
 
-   	//Write audit data (if onclick is not already being used)
-	var html;
-	if ($("#submit1").attr("onclick") === undefined) {
-		html = "printAudit('" + $("h2").html() + ":" + $("#submit1").html() + "');";
-		$("#submit1").attr("onclick", html);
+	//Write audit data (if onclick is not already being used)
+	try {
+		var html;
+		if ($("#submit1").attr("onclick") === undefined) {
+			html = "printAudit('" + $("h2").html() + ":" + $("#submit1").html() + "');";
+			$("#submit1").attr("onclick", html);
+		}
+		if ($("#submit2").attr("onclick") === undefined) {
+			html = "printAudit('" + $("h2").html() + ":" + $("#submit2").html() + "');";
+			$("#submit2").attr("onclick", html);
+		}
 	}
-	if ($("#submit2").attr("onclick") === undefined) {
-		html = "printAudit('" + $("h2").html() + ":" + $("#submit2").html() + "');";
-		$("#submit2").attr("onclick", html);
+	catch (ex) {
+		console.log('Setting audit message for buttons', ex.message);
 	}
+	
+	//Write audit data for specific pages
+	try {
+		var current = location.href.split("/").pop().substring(0, location.href.split("/").pop().indexOf('?'));
+		if (current === "agent.htm") {
+			printAudit($("h2").html() + ":" + "(transfer to agent)");
+			document.getElementById("txtAudit").value = document.cookie.substring(document.cookie.lastIndexOf("=") + 1);
+		}//end if
+		else {
+			var page = getQueryVariable('page');
+			if (current === "ncnu.htm") {
+				if (page === "1") {
+					printAudit("IVR Simulator: Choose your entrance method:NCNU Branch");
+					document.getElementById("txtAudit").value = document.cookie.substring(document.cookie.lastIndexOf("=") + 1);
+				}//end if
+			}//end if
+			else if (current === "cloud.htm") {
+				if (page === "1") {
+					printAudit("IVR Simulator: Choose your entrance method:Cloud");
+					document.getElementById("txtAudit").value = document.cookie.substring(document.cookie.lastIndexOf("=") + 1);
+				}//end if
+			}//end elseif
+		}//end else
+	}//end try
+	catch (ex) {
+		console.log('Setting audit message for pages', ex.message);
+	}//end catch
+
 </script>
 </body>
 </html>

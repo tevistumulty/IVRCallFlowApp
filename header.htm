@@ -6,7 +6,7 @@
 <div class="drop">
 	<ul class="drop_menu">
 		<li><a id="index" href="index.htm">Restart Simulation</a></li>
-		<li><a id="agent0" href="agent.htm">Press 0 Anytime</a></li>
+		<li><a id="agent0">Press 0 Anytime</a></li>
 	</ul>
 </div>
 <div class="drop">
@@ -29,6 +29,7 @@
 	}
 	$("#index").attr("onclick", "resetAudit();");
 	$("#agent0").attr("onclick", "printAudit('User presses -0- to speak to agent.');");
+	
 	//If the user selects NCNU, the menu should be different than for Cloud
 	//Let "main" be the pages for NCNU (rename to ncnu.htm), and "cloud" for cloud
 	//Dynamically populate the innerHTML of the list items of above to match the
@@ -93,12 +94,14 @@
 		$("#5").attr("href", "ncnu.htm?zeroState=" + setting + "&amp;page=5&amp;menu=" + menu);
 		$("#6").attr("href", "ncnu.htm?zeroState=" + setting + "&amp;page=6&amp;menu=" + menu);
 		$("#7").attr("href", "agent.htm?zeroState=" + setting + "&amp;page=7&amp;menu=" + menu);
+		$("#agent0").attr("href", "agent.htm?zeroState=" + setting + "&amp;page=7&amp;menu=" + menu);
 		break;
 	case "cloud":
 		$("#1").attr("href", "cloud.htm?zeroState=" + setting + "&amp;page=1&amp;menu=" + menu);
 		$("#2").attr("href", "cloud.htm?zeroState=" + setting + "&amp;page=2&amp;menu=" + menu);
 		$("#3").attr("href", "cloud.htm?zeroState=" + setting + "&amp;page=3&amp;menu=" + menu);
-		$("#4").attr("href", "agent.htm?zeroState=" + setting + "&amp;page=7&amp;menu=" + menu);
+		$("#4").attr("href", "agent.htm?zeroState=" + setting + "&amp;page=4&amp;menu=" + menu);
+		$("#agent0").attr("href", "agent.htm?zeroState=" + setting + "&amp;page=4&amp;menu=" + menu);
 		break;
 	}
 	
