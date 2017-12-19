@@ -31,8 +31,10 @@
 	function setSpanish() {
 		$("#form2").attr("action", "ncnu.htm?zeroState=" + getQueryVariable('zeroState') + 
 			"&amp;lang=sp&amp;page=3&amp;menu=" + menu);
+		//Call printAudit to log this
+		printAudit($("h2").html() + ":" + $("#submit2").html());
 	}
-	
+		
 	var page = getQueryVariable("page");
 	if (page === undefined) {page = getQueryVariableEsc("page");}
 	menu = getQueryVariable("menu");
@@ -46,7 +48,7 @@
 		$("#form2").remove();
 		break;
 	case "2":
-		$("h2").html("For English press '1', para Español, marque '2'");
+		$("h2").html("For English press -1-, para Español, marque -2-");
 		$("#form1").attr("action", "ncnu.htm?zeroState=" + getQueryVariable('zeroState') + 
 			"&amp;lang=en&amp;page=3&amp;menu=" + menu);
 		$("#submit1").html("1");
@@ -57,16 +59,16 @@
 		$("h2").html("Please listen carefully as our menu options have changed");
 		$("#form1").attr("action", "ncnu.htm?zeroState=" + getQueryVariable("zeroState") + "&amp;lang=" + 
 			getQueryVariableEsc("lang") + "&amp;page=4&amp;menu=" + getQueryVariableEsc("menu"));
-		$("#submit1").html("Press 3: Changes to existing insurance and claims");
+		$("#submit1").html("Press -3-: Changes to existing insurance and claims");
 		$("#form2").attr("action", "ncnu.htm?zeroState=1" + "&amp;lang=" + getQueryVariableEsc("lang") + 
 			"&amp;page=2&amp;menu=" + menu);
-		$("#submit2").html("User presses 0 to repeat menu");
+		$("#submit2").html("User presses -0- to repeat menu");
 		break;
 	case "4":
-		$("h2").html("Select 1 for Claims and Insurance");
+		$("h2").html("Select -1- for Claims and Insurance");
 		$("#form1").attr("action", "ncnu.htm?zeroState=" + getQueryVariable("zeroState") + 
 			"&amp;lang=" + getQueryVariableEsc("lang") + "&amp;page=5&amp;menu=" + menu);
-		$("#submit1").html("User presses 1");
+		$("#submit1").html("User presses -1-");
 		$("#form2").remove();
 		break;
 	case "5":
@@ -81,12 +83,11 @@
 	case "6":
 		$("h2").html("Great.  I see a policy that matches your phone number, to ensure that it is yours, please enter your zip code.");
 		$("#form1").attr("action", "agent.htm?zeroState=" + getQueryVariable("zeroState") + 
-			"&amp;lang=" + getQueryVariableEsc("lang") + "&amp;page=agent&amp;menu=" + menu);
+			"&amp;lang=" + getQueryVariableEsc("lang") + "&amp;page=7&amp;menu=" + menu);
 		$("#submit1").html("Speak or key in zip code");
 		$("#form2").remove();
 		break;
 	}
-	
 </script>
 <div id="footer"></div>
 <script>

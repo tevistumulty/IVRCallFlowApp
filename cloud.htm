@@ -32,10 +32,10 @@
 	if (menu === undefined) {menu = getQueryVariableEsc("menu");}
 	switch (page) {
 	case "1":
-		$("h2").html("For Insurance and Claims press '1'");
+		$("h2").html("For Insurance and Claims press -1-");
 		$("#form1").attr("action", "cloud.htm?zeroState=" + getQueryVariable("zeroState") + 
 			"&amp;lang=en" + "&amp;page=2&amp;menu=" + menu);
-		$("#submit1").html("User presses 1");
+		$("#submit1").html("User presses -1-");
 		$("#form2").remove();
 		break;
 	case "2":
@@ -44,18 +44,17 @@
 			getQueryVariableEsc("lang") + "&amp;page=3&amp;menu=" + menu);
 		$("#submit1").html("Yes");
 		$("#form2").attr("action", "agent.htm?zeroState=" + getQueryVariable("zeroState") + "&amp;lang=en" + 
-			"&amp;page=agent&amp;menu=" + menu);
+			"&amp;page=4&amp;menu=" + menu);
 		$("#submit2").html("No");
 		break;
 	case "3":
 		$("h2").html("Great.  I see a policy that matches your phone number, to ensure that it is yours, please enter your zip code.");
 		$("#form1").attr("action", "agent.htm?zeroState=" + getQueryVariable("zeroState") + 
-			"&amp;lang=en" + "&amp;page=agent&amp;menu=" + menu);
+			"&amp;lang=en" + "&amp;page=4&amp;menu=" + menu);
 		$("#submit1").html("Speak or key in zip code");
 		$("#form2").remove();
 		break;
 	}
-	
 </script>
 <div id="footer"></div>
 <script>

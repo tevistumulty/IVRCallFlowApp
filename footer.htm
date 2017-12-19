@@ -1,10 +1,26 @@
 <!DOCTYPE html>
 <html>
 <body id="footBody">
-<div>
+<div class="drop">
 <textarea id="txtAudit" />
 </div>
 <script>
+   if (document.cookie) {
+      var audit = document.cookie;
+      audit = audit.substring(audit.lastIndexOf("=") + 1);
+      document.getElementById("txtAudit").value = audit;
+   }
+
+   	//Write audit data (if onclick is not already being used)
+	var html;
+	if ($("#submit1").attr("onclick") === undefined) {
+		html = "printAudit('" + $("h2").html() + ":" + $("#submit1").html() + "');";
+		$("#submit1").attr("onclick", html);
+	}
+	if ($("#submit2").attr("onclick") === undefined) {
+		html = "printAudit('" + $("h2").html() + ":" + $("#submit2").html() + "');";
+		$("#submit2").attr("onclick", html);
+	}
 </script>
 </body>
 </html>

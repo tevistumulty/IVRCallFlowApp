@@ -26,3 +26,8 @@ function getQueryVariableEsc(variable) {
     }
     console.log('Query variable %s not found', variable);
 }
+
+function printAudit(text) {
+	var newString = document.getElementById("txtAudit").value + text + "|";
+	document.cookie = "audit=" + newString;
+}
