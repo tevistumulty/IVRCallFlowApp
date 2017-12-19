@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<body id="footBody">
+<div class="drop">
+<textarea id="txtAudit" />
+</div>
+<script>
+	//Get audit data from cookie
+	try {
+		var audit;
+		if (document.cookie) {
+			audit = document.cookie;
+			audit = audit.substring(audit.lastIndexOf("=") + 1);
+			document.getElementById("txtAudit").value = audit.replace(/\|/g, "\n");
+		}//end if
+	}//end try
+	catch (ex) {
+		console.log('Setting txtAudit to cookie value', ex.message);
+	}//end catch
+
+	//Write audit data (if onclick is not already being used)
+	try {
+		var html;
+		if ($("#submit1").attr("onclick") === undefined) {
+			html = "printAudit('" + $("h2").html() + ":" + $("#submit1").html() + "');";
+			$("#submit1").attr("onclick", html);
+		}//end if
+		if ($("#submit2").attr("onclick") === undefined) {
+			html = "printAudit('" + $("h2").html() + ":" + $("#submit2").html() + "');";
+			$("#submit2").attr("onclick", html);
+		}//end if
+	}//end try
+	catch (ex) {
+		console.log('Setting audit message for buttons', ex.message);
+	}//end catch
+	
+	//Write audit data for specific pages
+	try {
+		var current = location.href.split("/").pop().substring(0, location.href.split("/").pop().indexOf('?'));
+		if (current === "agent.htm") {
+			printAudit($("h2").html() + ":" + "(transfer to agent)");
+			var str = document.cookie.substring(document.cookie.lastIndexOf("=") + 1);
+			document.getElementById("txtAudit").value = str.replace(/\|/g, "\n");
+		}//end if
+		else {
+			var page = getQueryVariable('page');
+			if (current === "ncnu.htm") {
+				if (page === "1") {
+					printAudit("IVR Simulator: Choose your entrance method:NCNU Branch");
+					$('#txtAudit').val(document.cookie.substring(document.cookie.lastIndexOf("=") + 1).replace(/\|/g, "\n"));
+				}//end if
+			}//end if
+			else if (current === "cloud.htm") {
+				if (page === "1") {
+					printAudit("IVR Simulator: Choose your entrance method:Cloud");
+					$('#txtAudit').val(document.cookie.substring(document.cookie.lastIndexOf("=") + 1).replace(/\|/g, "\n"));
+				}//end if
+			}//end elseif
+		}//end else
+	}//end try
+	catch (ex) {
+		console.log('Setting audit message for pages', ex.message);
+	}//end catch
+
+</script>
+</body>
+</html>
