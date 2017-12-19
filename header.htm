@@ -26,7 +26,8 @@
 	  var expiresDate = new Date();
       expiresDate.setDate(expiresDate.getDate() - 7);
       document.cookie = "audit=null; expires=" + expiresDate.toUTCString();	
-	}
+	}//end function
+	
 	$("#index").attr("onclick", "resetAudit();");
 	$("#agent0").attr("onclick", "printAudit('User presses -0- to speak to agent.');");
 	
@@ -55,7 +56,7 @@
 		$("#6").remove();
 		$("#7").remove();	
 		break;
-	}
+	}//end switch
 	
 	//Change the navigation bar's color for the current page
 	var page = getQueryVariable("page");
@@ -67,11 +68,11 @@
 	try {
 		if (isNaN(zeroState)) {
 			zero = getQueryVariable('zeroState');
-		}
+		}//end if
 		else {
 			zero = zeroState;
-		}
-	}
+		}//end else
+	}//end try
 	catch (e) {zero = getQueryVariable('zeroState');}
 	
 	//Display option for pressing zero to go to agent IF zero has already been pressed once
@@ -103,7 +104,7 @@
 		$("#4").attr("href", "agent.htm?zeroState=" + setting + "&amp;page=4&amp;menu=" + menu);
 		$("#agent0").attr("href", "agent.htm?zeroState=" + setting + "&amp;page=4&amp;menu=" + menu);
 		break;
-	}
+	}//end switch
 	
 </script>
 </body>
